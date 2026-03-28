@@ -57,8 +57,9 @@ const AdminInstructors = () => {
     e.preventDefault();
     try {
       if (editingId) {
-        // Cập nhật: Không gửi username
+        // Cập nhật: bao gồm cả username
         await api.put(`/admin/instructors/${editingId}`, {
+          username: formData.username,
           password: formData.password || undefined,
           level: formData.level
         });
@@ -161,10 +162,9 @@ const AdminInstructors = () => {
                       <input
                         type="text"
                         required
-                        disabled={!!editingId}
                         value={formData.username}
                         onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm disabled:bg-gray-100 disabled:cursor-not-allowed"
+                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                       />
                     </div>
                     <div>
